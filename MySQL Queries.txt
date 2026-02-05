@@ -1,0 +1,66 @@
+MySQL 
+
+show data bases;
+
+create database batch1299;
+
+use database batch1299;
+
+show tables;
+
+create table employeeDetails (empid int primary key autoincreament,empName varchar(20),empSalary int,empEmail varchar(20) Not Null,empDepart varchar Not Null,empExp varchar(10) ,empMobilNo bigint unique key Not Null,empAddress varchar(20),empGender varchar(23),empDOB varchar(20),empJoinDOB varchar(20) Not Null,empAdharNo bigint ,empbankAcc bigint Not Null,emmpPanNo varchar(20));
+
+desc employeeDetails;
+
+insert into employeeDetails (empid,empName,empSalary,empEmail,empDapart,empExp,empMobileNo,empAddress,empGender,empDOB,empJoinDOB,empAdharNo,empbankAcc,empPanNo),values('minakshi',300000,'minakshi@gmail.com','java developer','1 year',9876254653234,'Pune maharashtra','female','1-05-2004',2-4-2026,908752452332,123234556,'IVMPO56WF'),('tejaswini,400000,teju@gmail.com,'testing,'2 year',23456789123,'dondaicha maharashtra','Female','16-12-2006',2345678976543,123443212,'IVPLVE34V')
+
+select * from employeeDatails;
+
+update employeeDetails set empExp = '3 year'where id =2;
+
+select * from employeeDetails where empEmail is Not Null;
+
+select * from employeeDetails where empid=1 AND empName = 'minakshi'
+
+select * from employeeDetails where Not Null;
+
+Alter Table employeeDetails Add empCountry varchar(20);
+
+Alter Table employeeDetails modify empSalary bigint;
+
+Alter table employeeDetails Rename column empMobileNo to empMoNo;
+
+select * from employeeDetails order by salary ASC;
+
+select * from employeeDetails order by salary DESC;
+
+select empSalary As Salary from employeeDetails;
+
+select MIN(empSalary)from employeeDetails;
+
+select MAX(empSalary) from employeeDetails;
+
+select AVG(empSalary) from employeeDetails;
+
+Alter Table employeeDetails Drop column empPanNo;
+
+insert into employeeDetails values('Nilima,6000000,'nilima@gmail.com','CS','4 years',567097238532,'shirpurmaharashtra','Female',2-4-2005',4-3-2026',1234567676,1298982357);
+
+select * from employeeDetails;
+
+select * from employeeDetails limit 2;
+
+select * from employeeDetails limit 2 offset 3;
+
+select * from employeeDetails where empname m%;
+
+select * from employeeDetails where empGender In('female');
+
+select * from employeeDetails where empGender Not In('female');
+
+
+
+
+  
+
+
