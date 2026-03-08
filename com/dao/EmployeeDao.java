@@ -1,64 +1,91 @@
 package com.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.MutationQuery;
+import org.hibernate.query.Query;
+
+import com.entity.Employee;
 
 public class EmployeeDao {
+
 	
-	public void fetchAllRecord() throws  Exception {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/batch425","root","root");
-		Statement s = c.createStatement();
-		ResultSet rs = s.executeQuery("Select * from employee");
+	public void getAllRecord() {
 		
-		while(rs.next()) {
-			System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3)+" "+rs.getLong(4)+"  "+rs.getString(5)+"  "+rs.getString(6)+"  "+rs.getString(7)+"  "+rs.getString(8)+" "+rs.getString(9)+" "+rs.getString(10));
+		Configuration cfg = new Configuration();
+		cfg.configure("hibernate.cfg.xml");
+		cfg.addAnnotatedClass(Employee.class);
+		SessionFactory sf = cfg.buildSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		String hqlQuery = "from Employee";
+		Query<Employee> query = ss.createQuery(hqlQuery,Employee.class);
+		List<Employee> list = query.getResultList();
+		
+		for(Employee employee: list) {
+			System.out.println(employee);
 		}
-		c.close();
-	}
-	
-	public void insertData() throws Exception {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/batch425","root","root");
-		Statement s =c.createStatement();
-		int check = s.executeUpdate("insert into employee(empid,name,email,phoneNo,salary,department,joinDate,City,gender,age)values(121,'Minaksh','minakshi@gmail.com',9876543221,'5LPA','Java Developer','2026-6-2','pune','female',22)");
-		if(check>0) {
-			System.out.println("Data is Inserted");
-		}else {
-			System.out.println("Data is not Inserted");
-			
-		}
-		c.close();
-	}
-	public void updateData() throws Exception {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/batch425","root","root");
-		Statement s =c.createStatement();
-		int check = s.executeUpdate("update employee set City ='Mumbai' where empid =121");
-		if(check>0) {
-			System.out.println("Data is updated");
-		}else {
-			System.out.println("Data is not updated");
-			
-		}
-		c.close();
-	}
-	public void deleteData() throws Exception {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/batch425","root","root");
-		Statement s =c.createStatement();
-		int check = s.executeUpdate("delete from employee  where id =121");
-		if(check>0) {
-			System.out.println("Data is updated");
-		}else {
-			System.out.println("Data is not updated");
-			
-		}
-		c.close();
-	}
-
+		tr.commit();
+		ss.close();
 }
-
+	
+	public void getSingleRecord() {
+		Configuration cfg = new Configuration();
+		cfg.configure("hibernate.cfg.xml");
+		cfg.addAnnotatedClass(Employee.class);
+		SessionFactory sf = cfg.buildSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+		
+		String hqlQuery = "from Employee where empId =:empId";
+		Query query1 = ss.createQuery(hqlQuery,Employee.class);
+		query1.setParameter("empId", 121);
+		Employee e1 = (Employee) query1.getSingleResult();
+		System.out.println(e1);
+		
+		tr.commit();
+		ss.close();
+		
+	}
+	public void deleteRecord() {
+		Configuration cfg = new Configuration();
+		cfg.configure("hibernate.cfg.xml");
+		cfg.addAnnotatedClass(Employee.class);
+		SessionFactory sf = cfg.buildSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+	
+		String hqlQuery ="delete from Employee where empId =:empId";
+		MutationQuery query = ss.createMutationQuery(hqlQuery);
+		query.setParameter("empId",130);
+		query.executeUpdate();
+		
+		System.out.println("Data is deleted");
+		tr.commit();
+		ss.close();
+}
+	public void updateRecord() {
+		Configuration cfg = new Configuration();
+		cfg.configure("hibernate.cfg.xml");
+		cfg.addAnnotatedClass(Employee.class);
+		SessionFactory sf = cfg.buildSessionFactory();
+		Session ss = sf.openSession();
+		Transaction tr = ss.beginTransaction();
+	
+		String hqlQuery ="update Employee set city =:city where empId =:empId";
+		MutationQuery query = ss.createMutationQuery(hqlQuery);
+		query.setParameter("city","Delhi");
+		query.setParameter("empId",121);
+		query.executeUpdate();
+		
+		System.out.println("Data is updated..");
+		tr.commit();
+		ss.close();
+}
+	
+}

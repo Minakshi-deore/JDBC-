@@ -3,12 +3,12 @@ package com.controller;
 import com.service.EmployeeService;
 
 public class EmployeeController {
-	public static void main(String[] args) throws Exception {
-		EmployeeService es = new EmployeeService();
-		//es.insertData();
-		//es.updateData();
-		es.fetchAllRecord();
-		//es.deleteData();
+  
+	public static void main(String[] args) {
+		EmployeeService service = new EmployeeService();
+		//service.GetAllRecord();
+		//service.GetSingleRecord();
+		//service.DeleteRecord();
+		service.UpdateRecord();
 	}
-
 }

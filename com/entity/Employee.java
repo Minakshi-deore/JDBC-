@@ -1,22 +1,36 @@
 package com.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Employee {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int empId;
-	private String name;
+	private String empName;
+	@Column(unique = true, nullable = false)
+	private  String email;
 	private String city;
+	private long mobileNo;
 	
 	
-	
-	@Override
-	public String toString() {
-		return "Employee [empId=" + empId + ", name=" + name + ", city=" + city + "]";
+	public Employee() {
+		
 	}
 
+
+	public Employee(int empId, String empName, String email, String city, long mobileNo) {
+		super();
+		this.empId = empId;
+		this.empName = empName;
+		this.email = email;
+		this.city = city;
+		this.mobileNo = mobileNo;
+	}
 
 
 	public int getEmpId() {
@@ -24,23 +38,29 @@ public class Employee {
 	}
 
 
-
 	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
 
 
-
-	public String getName() {
-		return name;
+	public String getEmpName() {
+		return empName;
 	}
 
 
-
-	public void setName(String name) {
-		this.name = name;
+	public void setEmpName(String empName) {
+		this.empName = empName;
 	}
 
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 
 	public String getCity() {
@@ -48,24 +68,25 @@ public class Employee {
 	}
 
 
-
 	public void setCity(String city) {
 		this.city = city;
 	}
 
 
-
-	public Employee(int empId, String name, String city) {
-		super();
-		this.empId = empId;
-		this.name = name;
-		this.city = city;
+	public long getMobileNo() {
+		return mobileNo;
 	}
 
 
+	public void setMobileNo(long mobileNo) {
+		this.mobileNo = mobileNo;
+	}
 
-	public Employee() {
-		
+
+	@Override
+	public String toString() {
+		return "Employee [empId=" + empId + ", empName=" + empName + ", email=" + email + ", city=" + city
+				+ ", mobileNo=" + mobileNo + "]";
 	}
 	
 	

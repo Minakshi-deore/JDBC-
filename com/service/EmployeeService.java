@@ -2,23 +2,24 @@ package com.service;
 
 import com.dao.EmployeeDao;
 
-
 public class EmployeeService {
-    
-	public void insertData() throws Exception {
-		EmployeeDao sd = new EmployeeDao();
-		sd.insertData();
+
+	public void GetAllRecord() {
+		EmployeeDao dao = new EmployeeDao();
+		dao.getAllRecord();
+
 	}
-	public void updateData() throws Exception {
-		EmployeeDao sd = new EmployeeDao();
-		sd.updateData();
+	public void GetSingleRecord() {
+		EmployeeDao dao = new EmployeeDao();
+		dao.getSingleRecord();
 	}
-	public void deleteData() throws Exception {
-		EmployeeDao sd = new EmployeeDao();
-		sd.deleteData();
+	public void DeleteRecord() {
+		EmployeeDao dao = new EmployeeDao();
+		dao.deleteRecord();
 	}
-	public void fetchAllRecord() throws Exception {
-		EmployeeDao sd = new EmployeeDao();
-		sd.fetchAllRecord();
+	public void UpdateRecord() {
+		EmployeeDao dao = new EmployeeDao();
+		dao.updateRecord();
 	}
+
 }
